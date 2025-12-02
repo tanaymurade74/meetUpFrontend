@@ -6,8 +6,8 @@ const Events = () => {
     const[eventType, setEventType] = useState("both")
     const[search, setSearch] = useState("");
 
-    const apiUrl = search === "" ? `http://localhost:3000/events/type/${eventType}` : 
-                  `http://localhost:3000/events/search/${search}`
+    const apiUrl = search === "" ? `${process.env.REACT_APP_API_URL}/events/type/${eventType}` : 
+                  `${process.env.REACT_APP_API_URL}/events/search/${search}`
 
 
     const {data, loading, error} = useFetch(apiUrl)
@@ -22,7 +22,6 @@ const Events = () => {
         </div>
         <div className="col-6 text-end">
             <select className="p-2 rounded text-body-tertiary" 
-            // disabled = {search !== ""} 
             onChange = {(event) => setEventType(event.target.value) }>
                 <option value = "both"   >Select event type</option>
                 <option value = "online">Online</option>

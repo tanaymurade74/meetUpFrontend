@@ -7,7 +7,7 @@ const EventDetails = () => {
     const name = encodeURIComponent(param.eventName);
     console.log(name)
 
-    const {data, loading, error} = useFetch(`http://localhost:3000/events/name/${name}`)
+    const {data, loading, error} = useFetch(`${process.env.REACT_APP_API_URL}/events/name/${name}`)
 
     console.log(data);
     return <div className="container bg-body-tertiary mt-3 py-4">
