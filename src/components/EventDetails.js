@@ -22,11 +22,11 @@ const EventDetails = () => {
     <main >
        {data?.map(data => (
         <div className="row">
-            <div className="col-6">
+            <div className="col-12 col-md-6 mb-4">
         <h2>{data.name}</h2>
         <>Hosted By:</><br/>
         <strong>{data.hostedBy}</strong><br/><br/>
-        <img src = {data.eventImageUrl} style ={{height: "250px", objectFit: "cover"}}/><br/><br/>
+        <img src = {data.eventImageUrl} style ={{ width : "100%" , height: "250px", objectFit: "cover"}}/><br/><br/>
         <h3>Details: </h3>
         <p>{data.details}</p>
         {data.dressCode || data.ageRestrictions ? <>
@@ -42,7 +42,7 @@ const EventDetails = () => {
 </>
         ))}
         </div>
-        <div className="col-6">
+        <div className="col-12 col-md-6 mb-4">
             <div className="card p-3 mt-4">
                 <h6><strong>Time: </strong>{data.date} at {data.startTime} to {data.date} at {data.endTime}</h6><br/>
                 <h6><strong>Venue: </strong>{data.venue}</h6><br/>
@@ -51,7 +51,7 @@ const EventDetails = () => {
             <h3>Speakers: ({data.speakers.length})</h3>
             <div className="row">
                 {data.speakers.map(item => (
-                    <div className="col-6">
+                    <div className="col-12 col-sm-6">
                     <div className="card p-3 mt-4">
                         <img className = "img-fluid rounded-circle"src = {item.speakerImageUrl} style ={{height: "200px", objectFit: "cover"}}/><br/>
                         <strong>{item.name}</strong>
