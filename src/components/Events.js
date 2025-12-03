@@ -7,7 +7,8 @@ const Events = () => {
     const[search, setSearch] = useState("");
 
     const apiUrl = search === "" ? `${process.env.REACT_APP_API_URL}/events/type/${eventType}` : 
-                  `${process.env.REACT_APP_API_URL}/events/search/${search}`
+                  `${process.env.REACT_APP_API_URL}/events/search/${encodeURIComponent(search)}`
+    // const dummy = (encodeURIComponent(search))              
 
 
     const {data, loading, error} = useFetch(apiUrl)
@@ -16,23 +17,27 @@ const Events = () => {
     return <div className="container bg-body-tertiary">
     <Header search = {search} setSearch = {setSearch}/>
     <main >
-        <div className="row">
-        <div className="col-6">
-        <h1>MeetUp Events</h1><br/>
-        </div>
-        <div className="col-6 text-end">
-            <select className="p-2 rounded text-body-tertiary" 
-            onChange = {(event) => setEventType(event.target.value) }>
-                <option value = "both"   >Select event type</option>
-                <option value = "online">Online</option>
-                <option value = "offline">Offline</option>
-                <option value = "both">Both</option>
-            </select>
-        </div>
-        </div>
+       <div className="row align-items-center gy-2 mb-3">
+  <div className="col-12 col-md-6">
+    <h1 className="h3 mb-0 mt-3">MeetUp Events</h1>
+  </div>
+  <div className="col-12 col-md-6 text-md-end">
+    <select
+      className="p-2 rounded text-body-tertiary mt-3"
+      onChange={(event) => setEventType(event.target.value)}
+      value={eventType}
+    >
+      <option value="both">Select event type</option>
+      <option value="online">Online</option>
+      <option value="offline">Offline</option>
+      <option value="both">Both</option>
+    </select>
+  </div>
+</div>
+
         <div className="row">
         {data?.map((item) => (
-            <div className="col-md-4 mb-4" key={item._id}>
+            <div className="col-12 col-sm-6 col-lg-4 mb-4" key={item._id}>
                 <Link to = {`/events/${item.name}`} >
                 <div className="card">
                   <img src={item.eventImageUrl} className="card-img img-fluid" alt="event" style={{ height: "300px", objectFit: "cover" }}/>
